@@ -60,5 +60,18 @@ public class BookServiceTest {
 
     }
 
+    @Test
+    public void testUpdateBook(){
+        Book book = new Book();
+        Author author = new Author();
+        when(bookRepository.findById(any(Integer.class))).thenReturn(Optional.of(book));
+        book.setBookname("dummyname");
+        book.setAuthor(author);
+        when(bookRepository.save(any(Book.class))).thenReturn(book);
+        Book result = bookService.updateBook(any(Integer.class), book);
+        assertEquals(book,result);
+
+    }
+
 
 }
