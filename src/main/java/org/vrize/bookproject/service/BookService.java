@@ -50,12 +50,11 @@ public class BookService {
     }
 
     public Book findBookByName(String bookname){
-        System.out.println(bookname);
-        System.out.println(bookRepository.findBookByBookname(bookname));
        return bookRepository.findBookByBookname(bookname);
     }
 
     public List<Book> findBookByAuthorName(String author_name){
+
         return bookRepository.findByAuthor_Name(author_name);
     }
 

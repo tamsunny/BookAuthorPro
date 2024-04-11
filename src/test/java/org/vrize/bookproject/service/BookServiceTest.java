@@ -56,12 +56,12 @@ public class BookServiceTest {
         book.setAuthor(author);
         when(bookRepository.save(book)).thenReturn(book);
         Book result = bookService.addBook(book);
-        assertEquals(book,result);
+        assertEquals(book, result);
 
     }
 
     @Test
-    public void testUpdateBook(){
+    public void testUpdateBook() {
         Book book = new Book();
         Author author = new Author();
         when(bookRepository.findById(any(Integer.class))).thenReturn(Optional.of(book));
@@ -69,9 +69,27 @@ public class BookServiceTest {
         book.setAuthor(author);
         when(bookRepository.save(any(Book.class))).thenReturn(book);
         Book result = bookService.updateBook(any(Integer.class), book);
-        assertEquals(book,result);
+        assertEquals(book, result);
 
     }
 
+    @Test
+    public void testfindBookByName(){
+        Book book = new Book();
+        when(bookRepository.findBookByBookname("dummyName")).thenReturn(book);
+        Book result = bookService.findBookByName("dummyName");
+        assertEquals(book,result);
+    }
+
+    @Test
+    public void testFindBookByAuthorName(){
+        List<Book> dummyBookList = new ArrayList<>();
+        dummyBookList.add(new Book());
+        dummyBookList.add(new Book());
+        dummyBookList.add(new Book());
+        when(bookRepository.findByAuthor_Name("dummyAuthorName")).thenReturn(dummyBookList);
+        List<Book> result = bookService.findBookByAuthorName("dummyAuthorName");
+        assertEquals(dummyBookList.size(),result.size());
+    }
 
 }
